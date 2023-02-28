@@ -1,0 +1,48 @@
+{
+  "name": "tank-cache",
+  "version": "1.0.0",
+  "description": "This is a file cache plug-in based on nodejs",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "ds": "^1.4.2"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "@types/node": "^18.14.2"
+  },
+  "scripts": {
+    "test": "mocha test/**/*.js",
+    "build:types": "tsc"
+  },
+  "engines": {
+    "node": ">=9.11.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curry-trooper/tank-cache.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/curry-trooper/tank-cache/issues"
+  },
+  "homepage": "https://github.com/curry-trooper/tank-cache#readme",
+  "keywords": [
+    "tank-cache",
+    "tankCache",
+    "cache",
+    "fileCache",
+    "file-cache",
+    "node-cache",
+    "nodejs-cache",
+    "koa-cache",
+    "exporess-cache"
+  ],
+  "files": [
+    "test",
+    "./*"
+  ]
+}

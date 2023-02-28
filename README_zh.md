@@ -1,24 +1,24 @@
 # tank-cache
 
-This is a file cache plug-in based on nodejs
+这是一个基于nodejs的缓存插件
 
-## install
+## 安装
 
 ```shell
 npm install --save tank-cache
 ```
 
-## examples
+## 例子
 
 ```js
-//import tank-cache
+//导入 tank-cache
 const FileCache = require("tank-cache/index")
 
-//default savePath process.cwd()+".runtime/cache.json"
+// 默认缓存保存 process.cwd()+".runtime/cache.json"
 const cache = new FileCache()
-//use savePath
+// 自定义缓存路径
 const cache = new FileCache(".runtime/mycache.json")
-//store 
+// 存储 
 cache.Store("tank", "man", 1)
 // or 
 cache.Set("tank", "man", 1)
@@ -29,6 +29,8 @@ cache.Set("tank", "man", 1)
 ## apis
 
 ### constructor(saveFilePath: any);
+
+构造函数
 
 ```
 * @param saveFilePath? default: ".runtime/cache.json"
@@ -42,7 +44,7 @@ cache.Set("tank", "man", 1)
 ```
 
 ### Has(key: any): any;
-Has Determine if an item exists in the cache.
+检测是否存在该项
 ```
 @param key
 @return {boolean}
@@ -53,7 +55,7 @@ Has Determine if an item exists in the cache.
 
 ### Get(key: any, defaultVal?: any): string | null;
 
-Get Retrieve an item from the cache by key.
+根据key从缓存中获取
 
 ```
 * @param key
@@ -64,7 +66,7 @@ Get Retrieve an item from the cache by key.
 
 ### Forever(key: any, val: any): void;
 
-Forever Store an item in the cache indefinitely.
+存储一个永久项
 
 ```
 @param key
@@ -76,7 +78,7 @@ Forever Store an item in the cache indefinitely.
 
 ### Forget(key: any): null | any;
 
-Forget Remove an item from the cache.
+移除指定key的缓存
 
 ```
 @param key
@@ -88,7 +90,7 @@ Forget Remove an item from the cache.
 
 ### Pull(key: any): string;
 
-Pull Retrieve an item from the cache and delete it.
+获取缓存值后删除
 
 ```
 @param key
@@ -99,7 +101,7 @@ Pull Retrieve an item from the cache and delete it.
 
 ### Store(key: any, val?: any, ttl?: number): any;
 
-Set Store an item in the cache for a given number of seconds.
+存储指定key的值到缓存，并可设置超时时间，ttl为0时，不会失效
 
 ```
 @param key
@@ -113,7 +115,7 @@ Set Store an item in the cache for a given number of seconds.
 
 ### Set(key: any, val?: any, ttl?: number): any;
 
-Set Store an item in the cache for a given number of seconds. as same Store function
+与 Store 功能相同
 
 ```
 @param key
@@ -127,8 +129,7 @@ Set Store an item in the cache for a given number of seconds. as same Store func
 
 ### Add(key: any, val?: any, ttl?: number): boolean;
 
-The Add method will only store data that does not exist in the cache. If the storage is successful, it will return true,
-otherwise it will return false:
+新增一个不存在的缓存，如果key值存在则不存储返回false，存储成功返回true
 
 ```
 @param key
@@ -141,8 +142,7 @@ otherwise it will return false:
 ```
 
 Flush(): void;
-Flush Remove all items from the cache.
-
+清空所有缓存
 ```
 @example
    cache.Flush()
