@@ -1,3 +1,5 @@
+[English](./README.md) | 中文
+
 # tank-cache
 
 这是一个基于nodejs的缓存插件

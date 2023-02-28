@@ -1,3 +1,4 @@
+English | [中文](./README_zh.md)
 # tank-cache
 
 This is a file cache plug-in based on nodejs
