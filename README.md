@@ -141,7 +141,7 @@ otherwise it will return false:
 @Function
 ```
 
-Flush(): void;
+### Flush(): void;
 Flush Remove all items from the cache.
 
 ```
