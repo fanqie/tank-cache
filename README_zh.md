@@ -143,7 +143,7 @@ cache.Set("tank", "man", 1)
 @Function
 ```
 
-Flush(): void;
+### Flush(): void;
 清空所有缓存
 ```
 @example
