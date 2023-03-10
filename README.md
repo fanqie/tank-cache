@@ -175,7 +175,7 @@ Remove the cache according to the prefix
 Increase the validity period
 
 ```
-@param ttl {Number} seconds
+@param ttl {Number} millisecond
 @Function
 ```
 

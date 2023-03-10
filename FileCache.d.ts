@@ -79,7 +79,7 @@ declare class FileCache {
     /**
      * Get the remaining time to live
      * @param key
-     * @return {number}  Second
+     * @return {number}  millisecond
      * @function
      */
     Ttl(key: any): number;
