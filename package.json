@@ -1,6 +1,6 @@
 {
   "name": "tank-cache",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "This is a file cache plug-in based on nodejs",
   "main": "index.js",
   "directories": {
