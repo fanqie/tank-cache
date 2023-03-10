@@ -2,17 +2,18 @@ export = FileCache;
 declare class FileCache {
     /**
      * This is a file cache plug-in based on nodejs
+     * @param saveFilePath? {string}
      * @example
-     * //use default savePath ".runtime/cache.json"
-     * const cache = new FileCache()
+     * //use default savePath process.cwd()+".runtime/cache.json"
+     * const fileCache = new FileCache()
      * //use my savePath
-     * const cache = new FileCache(".runtime/mycache.json")
-     * output path=process.cwd()+savePath
+     * const fileCache = new FileCache(".runtime/mycache.json")
      * @constructor
      */
-    constructor();
+    constructor(saveFilePath: any);
     data: any;
     dirPath: string;
+    lastClearTime: number;
     /**
      * Has Determine if an item exists in the cache.
      * @param key
@@ -52,6 +53,22 @@ declare class FileCache {
      */
     Forget(key: any): null | any;
     /**
+     * @param keys {string|string[]}
+     * @function
+     */
+    ForgetByKeys(keys: string | string[]): void;
+    /**
+     *  Remove  the cache according to the prefix
+     * @param prefix
+     * @function
+     */
+    FlushByPrefix(prefix?: string): void;
+    /**
+     * Increase the validity period
+     * @param ttl {Number} seconds
+     */
+    incrementTll(key: any, ttl?: number): void;
+    /**
      * Pull Retrieve an item from the cache and delete it.
      * @param key
      * @example
@@ -59,6 +76,25 @@ declare class FileCache {
      * @Function
      */
     Pull(key: any): string;
+    /**
+     * Get the remaining time to live
+     * @param key
+     * @return {number}  Second
+     * @function
+     */
+    Ttl(key: any): number;
+    /**
+     * Get all keys or filter by prefix
+     * @param prefix? {string}
+     * @return string[]
+     * @function
+     */
+    GetKeys(prefix?: string): string[];
+    /**
+     * When saving occurs, interval 3 minutes clear expire cache
+     * @private
+     */
+    private _clearExpire;
     _Now(): number;
     /**
      * Set Store an item in the cache for a given number of seconds.

@@ -4,10 +4,11 @@ const DS = require("ds").DS;
 module.exports = class FileCache {
     data = new DS();
     dirPath = ""
+    lastClearTime = this._Now()
 
     /**
      * This is a file cache plug-in based on nodejs
-     * @param saveFilePath?
+     * @param saveFilePath? {string}
      * @example
      * //use default savePath process.cwd()+".runtime/cache.json"
      * const fileCache = new FileCache()
@@ -94,6 +95,55 @@ module.exports = class FileCache {
     }
 
     /**
+     * @param keys {string|string[]}
+     * @function
+     */
+    ForgetByKeys(keys) {
+        if (typeof keys === "string") {
+            this.Forget(keys)
+            return
+        }
+        if (keys.length > 0) {
+            keys.forEach(key => {
+                if (this.data[key]) {
+                    delete this.data[key]
+                }
+            })
+            this._Save()
+        }
+    }
+
+    /**
+     *  Remove  the cache according to the prefix
+     * @param prefix
+     * @function
+     */
+    FlushByPrefix(prefix = "") {
+        if (prefix) {
+            const keys = this.GetKeys(prefix)
+            if (keys.length > 0) {
+                keys.forEach(key => {
+                    if (this.data[key]) {
+                        delete this.data[key]
+                    }
+                })
+                this._Save()
+            }
+        }
+    }
+
+    /**
+     * Increase the validity period
+     * @param ttl {Number} seconds
+     */
+    incrementTll(key, ttl = 0) {
+        if (this.Has(key)) {
+            this.data[key].expires = this.data[key].expires !== 0 ? this.data[key].expires += ttl * 1000 : 0
+            this._Save()
+        }
+    }
+
+    /**
      * Pull Retrieve an item from the cache and delete it.
      * @param key
      * @example
@@ -107,6 +157,61 @@ module.exports = class FileCache {
             return oldValue
         }
         return null;
+    }
+
+    /**
+     * Get the remaining time to live
+     * @param key
+     * @return {number}  Second
+     * @function
+     */
+    Ttl(key) {
+        let obj = this.data[key]
+        if (obj) {
+            if (obj.expires !== 0) {
+                return obj.expires - this._Now()
+            } else {
+                return obj.expires
+            }
+        }
+    }
+
+    /**
+     * Get all keys or filter by prefix
+     * @param prefix? {string}
+     * @return string[]
+     * @function
+     */
+    GetKeys(prefix = "") {
+        const res = []
+        for (let key in this.data) {
+            if (prefix && key.indexOf(prefix) === 0) {
+                if (this.data[key].expires === 0 || this._Now() < this.data[key].expires) {
+                    res.push(key)
+                }
+            }
+            if (prefix.length === 0 && (this.data[key].expires === 0 || this._Now() < this.data[key].expires)) {
+                res.push(key)
+            }
+        }
+        this._Save()
+        return res;
+    }
+
+    /**
+     * When saving occurs, interval 3 minutes clear expire cache
+     * @private
+     */
+    _clearExpire() {
+        if ((this._Now() - this.lastClearTime) > 3 * 60 * 1000) {
+            for (let key in this.data) {
+                if (this.data[key].expires !== 0 && this._Now() < this.data[key].expires) {
+                    delete this.data[key]
+                }
+            }
+            this._Save()
+            this.lastClearTime = this._Now()
+        }
     }
 
     _Now() {
@@ -176,6 +281,7 @@ module.exports = class FileCache {
     Flush() {
         this.data = {}
         this._Save()
+
     }
 
     /**
@@ -192,5 +298,6 @@ module.exports = class FileCache {
      */
     _Save() {
         this.data.save(this.dirPath);
+        this._clearExpire()
     }
 }

@@ -1,4 +1,5 @@
 English | [中文](./README_zh.md)
+
 # tank-cache
 
 This is a file cache plug-in based on nodejs
@@ -43,7 +44,9 @@ cache.Set("tank", "man", 1)
 ```
 
 ### Has(key: any): any;
+
 Has Determine if an item exists in the cache.
+
 ```
 @param key
 @return {boolean}
@@ -142,10 +145,57 @@ otherwise it will return false:
 ```
 
 ### Flush(): void;
+
 Flush Remove all items from the cache.
 
 ```
 @example
    cache.Flush()
+@Function
+```
+
+### ForgetByKeys(keys: string | string[]): void;
+
+```
+@param keys {string|string[]}
+@function
+```
+
+### FlushByPrefix(prefix?: string): void;
+
+Remove the cache according to the prefix
+
+```
+@param prefix {string}
+@function
+```
+
+### incrementTll(key: any, ttl?: number): void;
+
+Increase the validity period
+
+```
+@param ttl {Number} seconds
+@Function
+```
+
+### Ttl(key: any): number;
+
+Get the remaining time to live
+
+```
+@param key
+@return {number}  Second
+@function
+@Function
+```
+
+### GetKeys(prefix?: string): string[];
+
+Get all keys or filter by prefix
+
+```
+@param prefix? {string}
+@return string[]
 @Function
 ```

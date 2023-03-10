@@ -46,7 +46,9 @@ cache.Set("tank", "man", 1)
 ```
 
 ### Has(key: any): any;
+
 检测是否存在该项
+
 ```
 @param key
 @return {boolean}
@@ -144,9 +146,59 @@ cache.Set("tank", "man", 1)
 ```
 
 ### Flush(): void;
+
 清空所有缓存
+
 ```
 @example
    cache.Flush()
+@Function
+```
+
+### ForgetByKeys(keys: string | string[]): void;
+
+根据1个或多个key删除缓存
+
+```
+@param keys {string|string[]}
+@function
+```
+
+### FlushByPrefix(prefix?: string): void;
+
+移除所有key包含前缀的缓存
+
+```
+@param prefix {string}
+@function
+```
+
+### incrementTll(key: any, ttl?: number): void;
+
+增加生命时长，单位秒
+
+```
+@param ttl {Number} seconds
+@Function
+```
+
+### Ttl(key: any): number;
+
+获取剩余存活时间 单位毫秒
+
+```
+@param key
+@return {number}  Second
+@function
+@Function
+```
+
+### GetKeys(prefix?: string): string[];
+
+获取所有key或包含指定前缀的key集合
+
+```
+@param prefix? {string}
+@return string[]
 @Function
 ```
