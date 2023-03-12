@@ -188,7 +188,7 @@ cache.Set("tank", "man", 1)
 
 ```
 @param key
-@return {number}  Second
+@return {number}  millisecond
 @function
 @Function
 ```

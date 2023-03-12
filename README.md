@@ -175,7 +175,7 @@ Remove the cache according to the prefix
 Increase the validity period
 
 ```
-@param ttl {Number} millisecond
+@param ttl {Number} Second
 @Function
 ```
 
@@ -185,7 +185,7 @@ Get the remaining time to live
 
 ```
 @param key
-@return {number}  Second
+@return {number}  millisecond
 @function
 @Function
 ```
