@@ -2,7 +2,7 @@ export = FileCache;
 declare class FileCache {
     /**
      * This is a file cache plug-in based on nodejs
-     * @param saveFilePath? {string}
+     * @param {string} [saveFilePath=""]
      * @example
      * //use default savePath process.cwd()+".runtime/cache.json"
      * const fileCache = new FileCache()

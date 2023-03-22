@@ -21,9 +21,9 @@ const cache = new FileCache()
 //use savePath
 const cache = new FileCache(".runtime/mycache.json")
 //store 
-cache.Store("tank", "man", 1)
+cache.store("tank", "man", 1)
 // or 
-cache.Set("tank", "man", 1)
+cache.set("tank", "man", 1)
 
 
 ```
@@ -43,21 +43,21 @@ cache.Set("tank", "man", 1)
 * @constructor
 ```
 
-### Has(key: any): any;
+### has(key: any): any;
 
-Has Determine if an item exists in the cache.
+has Determine if an item exists in the cache.
 
 ```
 @param key
 @return {boolean}
 @example
-     cache.Has("tank")
+     cache.has("tank")
 @Function
 ```
 
-### Get(key: any, defaultVal?: any): string | null;
+### get(key: any, defaultVal?: any): string | null;
 
-Get Retrieve an item from the cache by key.
+get Retrieve an item from the cache by key.
 
 ```
 * @param key
@@ -66,58 +66,44 @@ Get Retrieve an item from the cache by key.
 * @Function
 ```
 
-### Forever(key: any, val: any): void;
+### forever(key: any, val: any): void;
 
-Forever Store an item in the cache indefinitely.
+forever store an item in the cache indefinitely.
 
 ```
 @param key
 @param val
 @example
-     cache.Forever("tank","nice")
+     cache.forever("tank","nice")
 @Function
 ```
 
-### Forget(key: any): null | any;
+### forget(key: any): null | any;
 
-Forget Remove an item from the cache.
+forget remove an item from the cache.
 
 ```
 @param key
 @return {null|*}
 @example
-    cache.Forget("tank","nice")
+    cache.forget("tank","nice")
 @Function
 ```
 
-### Pull(key: any): string;
+### pull(key: any): string;
 
-Pull Retrieve an item from the cache and delete it.
+pull Retrieve an item from the cache and delete it.
 
 ```
 @param key
 @example
-    cache.Pull("tank")
+    cache.pull("tank")
 @Function
 ```
 
-### Store(key: any, val?: any, ttl?: number): any;
+### store(key: any, val?: any, ttl?: number): any;
 
-Set Store an item in the cache for a given number of seconds.
-
-```
-@param key
-@param val
-@param ttl Second
-@return {*}
-@example
-   cache.Store("tank", "man", 1)
-@Function
-```
-
-### Set(key: any, val?: any, ttl?: number): any;
-
-Set Store an item in the cache for a given number of seconds. as same Store function
+set store an item in the cache for a given number of seconds.
 
 ```
 @param key
@@ -125,13 +111,27 @@ Set Store an item in the cache for a given number of seconds. as same Store func
 @param ttl Second
 @return {*}
 @example
-   cache.Set("tank", "man", 1)
+   cache.store("tank", "man", 1)
 @Function
 ```
 
-### Add(key: any, val?: any, ttl?: number): boolean;
+### set(key: any, val?: any, ttl?: number): any;
 
-The Add method will only store data that does not exist in the cache. If the storage is successful, it will return true,
+set store an item in the cache for a given number of seconds. as same store function
+
+```
+@param key
+@param val
+@param ttl Second
+@return {*}
+@example
+   cache.set("tank", "man", 1)
+@Function
+```
+
+### add(key: any, val?: any, ttl?: number): boolean;
+
+The add method will only store data that does not exist in the cache. If the storage is successful, it will return true,
 otherwise it will return false:
 
 ```
@@ -140,30 +140,30 @@ otherwise it will return false:
 @param ttl
 @return {boolean}
 @example
-   cache.Add("tank", "man", 1)
+   cache.add("tank", "man", 1)
 @Function
 ```
 
-### Flush(): void;
+### flush(): void;
 
-Flush Remove all items from the cache.
+flush remove all items from the cache.
 
 ```
 @example
-   cache.Flush()
+   cache.flush()
 @Function
 ```
 
-### ForgetByKeys(keys: string | string[]): void;
+### forgetByKeys(keys: string | string[]): void;
 
 ```
 @param keys {string|string[]}
 @function
 ```
 
-### FlushByPrefix(prefix?: string): void;
+### flushByPrefix(prefix?: string): void;
 
-Remove the cache according to the prefix
+remove the cache according to the prefix
 
 ```
 @param prefix {string}
@@ -179,9 +179,9 @@ Increase the validity period
 @Function
 ```
 
-### Ttl(key: any): number;
+### ttl(key: any): number;
 
-Get the remaining time to live
+get the remaining time to live
 
 ```
 @param key
@@ -190,9 +190,9 @@ Get the remaining time to live
 @Function
 ```
 
-### GetKeys(prefix?: string): string[];
+### getKeys(prefix?: string): string[];
 
-Get all keys or filter by prefix
+get all keys or filter by prefix
 
 ```
 @param prefix? {string}

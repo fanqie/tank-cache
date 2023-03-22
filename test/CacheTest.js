@@ -4,44 +4,47 @@ const FileCache = require("../FileCache")
 const assert = require("assert");
 
 describe('CacheTest', () => {
-
+    let fileCache=null
+    beforeEach(() => {
+         fileCache = new FileCache()
+    })
     it("fileCacheTest", (done) => {
-        const fileCache = new FileCache()
-        fileCache.Store("noTankPullXX","tankPullXX",60*60*24)
 
-        fileCache.Store("xxx","man",1)
-        fileCache.Store("tank","man",1)
-        assert.equal(fileCache.Get("tank"),"man");
-        fileCache.Store("tankPull","pull",1)
+        fileCache.store("noTankPullXX", "tankPullXX", 60 * 60 * 24)
+
+        fileCache.store("xxx", "man", 1)
+        fileCache.store("tank", "man", 1)
+        assert.equal(fileCache.get("tank"), "man");
+        fileCache.store("tankPull", "pull", 1)
 
         //get and remove it (key:tankPull)
-        assert.equal(fileCache.Pull("tankPull"),"pull")
-        assert.equal(fileCache.Get("tankPull"),null)
-        fileCache.Forever("tankForever","forever")
-        fileCache.Add("tankAdd","add",60*60*24)
+        assert.equal(fileCache.pull("tankPull"), "pull")
+        assert.equal(fileCache.get("tankPull"), null)
+        fileCache.forever("tankForever", "forever")
+        fileCache.add("tankAdd", "add", 60 * 60 * 24)
 
-        assert.equal(fileCache.Get("tankPull"),null)
-        assert.equal(fileCache.GetKeys().length,5)
-        assert.equal(fileCache.GetKeys("tank").length,3)
+        assert.equal(fileCache.get("tankPull"), null)
+        assert.equal(fileCache.getKeys().length, 5)
+        assert.equal(fileCache.getKeys("tank").length, 3)
 
-        setTimeout(()=>{
-            assert.equal(fileCache.Ttl("tank")>0,true);
-            fileCache.incrementTll("tank",1000)
-            assert.equal(fileCache.Ttl("tank")>1000,true)
-            assert.equal(fileCache.Get("tank"),"man");
-            assert.equal(fileCache.Get("tankForever"),"forever");
-            fileCache.Forget("tankForever")
+        setTimeout(() => {
+            assert.equal(fileCache.ttl("tank") > 0, true);
+            fileCache.incrementTll("tank", 1000)
+            assert.equal(fileCache.ttl("tank") > 1000, true)
+            assert.equal(fileCache.get("tank"), "man");
+            assert.equal(fileCache.get("tankForever"), "forever");
+            fileCache.forget("tankForever")
 
-        },800)
-        setTimeout(()=>{
-            assert.equal(fileCache.Get("tankForever"),null);
-            assert.equal(fileCache.Get("tankAdd"),"add");
-            fileCache.FlushByPrefix("tank")
-            assert.equal(fileCache.GetKeys().length,1)
-            fileCache.ForgetByKeys(['noTankPullXX'])
-            assert.equal(fileCache.GetKeys().length,0)
+        }, 800)
+        setTimeout(() => {
+            assert.equal(fileCache.get("tankForever"), null);
+            assert.equal(fileCache.get("tankAdd"), "add");
+            fileCache.flushByPrefix("tank")
+            assert.equal(fileCache.getKeys().length, 1)
+            fileCache.forgetByKeys(['noTankPullXX'])
+            assert.equal(fileCache.getKeys().length, 0)
             done();
-        },1100)
+        }, 1100)
     })
 
 })

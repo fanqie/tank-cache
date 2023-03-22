@@ -21,9 +21,9 @@ const cache = new FileCache()
 // 自定义缓存路径
 const cache = new FileCache(".runtime/mycache.json")
 // 存储 
-cache.Store("tank", "man", 1)
+cache.store("tank", "man", 1)
 // or 
-cache.Set("tank", "man", 1)
+cache.set("tank", "man", 1)
 
 
 ```
@@ -45,7 +45,7 @@ cache.Set("tank", "man", 1)
 * @constructor
 ```
 
-### Has(key: any): any;
+### has(key: any): any;
 
 检测是否存在该项
 
@@ -53,11 +53,11 @@ cache.Set("tank", "man", 1)
 @param key
 @return {boolean}
 @example
-     cache.Has("tank")
+     cache.has("tank")
 @Function
 ```
 
-### Get(key: any, defaultVal?: any): string | null;
+### get(key: any, defaultVal?: any): string | null;
 
 根据key从缓存中获取
 
@@ -68,7 +68,7 @@ cache.Set("tank", "man", 1)
 * @Function
 ```
 
-### Forever(key: any, val: any): void;
+### forever(key: any, val: any): void;
 
 存储一个永久项
 
@@ -76,11 +76,11 @@ cache.Set("tank", "man", 1)
 @param key
 @param val
 @example
-     cache.Forever("tank","nice")
+     cache.forever("tank","nice")
 @Function
 ```
 
-### Forget(key: any): null | any;
+### forget(key: any): null | any;
 
 移除指定key的缓存
 
@@ -88,22 +88,22 @@ cache.Set("tank", "man", 1)
 @param key
 @return {null|*}
 @example
-    cache.Forget("tank","nice")
+    cache.forget("tank","nice")
 @Function
 ```
 
-### Pull(key: any): string;
+### pull(key: any): string;
 
 获取缓存值后删除
 
 ```
 @param key
 @example
-    cache.Pull("tank")
+    cache.pull("tank")
 @Function
 ```
 
-### Store(key: any, val?: any, ttl?: number): any;
+### store(key: any, val?: any, ttl?: number): any;
 
 存储指定key的值到缓存，并可设置超时时间，ttl为0时，不会失效
 
@@ -113,13 +113,13 @@ cache.Set("tank", "man", 1)
 @param ttl Second
 @return {*}
 @example
-   cache.Store("tank", "man", 1)
+   cache.store("tank", "man", 1)
 @Function
 ```
 
-### Set(key: any, val?: any, ttl?: number): any;
+### set(key: any, val?: any, ttl?: number): any;
 
-与 Store 功能相同
+与 store 功能相同
 
 ```
 @param key
@@ -127,11 +127,11 @@ cache.Set("tank", "man", 1)
 @param ttl Second
 @return {*}
 @example
-   cache.Set("tank", "man", 1)
+   cache.set("tank", "man", 1)
 @Function
 ```
 
-### Add(key: any, val?: any, ttl?: number): boolean;
+### add(key: any, val?: any, ttl?: number): boolean;
 
 新增一个不存在的缓存，如果key值存在则不存储返回false，存储成功返回true
 
@@ -141,21 +141,21 @@ cache.Set("tank", "man", 1)
 @param ttl
 @return {boolean}
 @example
-   cache.Add("tank", "man", 1)
+   cache.add("tank", "man", 1)
 @Function
 ```
 
-### Flush(): void;
+### flush(): void;
 
 清空所有缓存
 
 ```
 @example
-   cache.Flush()
+   cache.flush()
 @Function
 ```
 
-### ForgetByKeys(keys: string | string[]): void;
+### forgetByKeys(keys: string | string[]): void;
 
 根据1个或多个key删除缓存
 
@@ -164,7 +164,7 @@ cache.Set("tank", "man", 1)
 @function
 ```
 
-### FlushByPrefix(prefix?: string): void;
+### flushByPrefix(prefix?: string): void;
 
 移除所有key包含前缀的缓存
 
@@ -182,7 +182,7 @@ cache.Set("tank", "man", 1)
 @Function
 ```
 
-### Ttl(key: any): number;
+### ttl(key: any): number;
 
 获取剩余存活时间 单位毫秒
 
@@ -193,7 +193,7 @@ cache.Set("tank", "man", 1)
 @Function
 ```
 
-### GetKeys(prefix?: string): string[];
+### getKeys(prefix?: string): string[];
 
 获取所有key或包含指定前缀的key集合
 
