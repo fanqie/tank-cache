@@ -23,7 +23,7 @@ module.exports = class FileCache {
         } else {
             this.dirPath = saveFilePath
         }
-        if (!fs.existsSync(this.dirPath)) {
+        if (!fs.existsSync(path.dirname(this.dirPath))) {
             fs.mkdirSync(path.dirname(this.dirPath))
             // throw new error("not found cache.saveFile：" + this.dirPath)
         }
