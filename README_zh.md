@@ -1,6 +1,7 @@
 [English](./README.md) | 中文
 
 # tank-cache
+![npm](https://img.shields.io/npm/dw/tank-cache)
 
 这是一个基于nodejs的缓存插件
 
